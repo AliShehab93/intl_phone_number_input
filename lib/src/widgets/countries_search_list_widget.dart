@@ -426,11 +426,11 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                             key: _key,
                             padding: const EdgeInsets.all(0),
                             controller: widget.scrollController,
+                            shrinkWrap: true,
                             // addAutomaticKeepAlives: false,
                             // shrinkWrap: true,
-                            itemCount: value.isNotEmpty ? value.length : 0,
+                            itemCount: value.isNotEmpty ? 244 : 0,
                             itemBuilder: (BuildContext context, int index) {
-                              // Country country = filteredCountries[index];
                               return Column(
                                 children: [
                                   //! Sized
