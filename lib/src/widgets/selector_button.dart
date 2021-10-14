@@ -54,6 +54,10 @@ class SelectorButton extends StatefulWidget {
   final double arrowHeight;
   final double arrowWidth;
   //!
+  //! search icon height and width
+  final double closeIconClickAreaHeightSize;
+  final double closeIconClickAreaWidthSize;
+  //!!!
   final double leftPaddingAlignElement;
   final double elementsListingSpacing;
   final double leftPaddingAlignHeaderText;
@@ -133,6 +137,8 @@ class SelectorButton extends StatefulWidget {
     required this.spacingBetweenFlagAndName,
     required this.arrowIconColor,
     required this.iconSize,
+    required this.closeIconClickAreaHeightSize,
+    required this.closeIconClickAreaWidthSize,
     this.leftTextFieldFlag = 15,
     this.rightTextFieldFlag = 8.67,
     this.arrowHeight = 5.86,
@@ -262,7 +268,7 @@ class _SelectorButtonState extends State<SelectorButton> {
   }
 
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.DIALOG] is selected
-  ///
+  //TODO: todo
   /// //!Dialog
   showCountrySelectorDialog() {
     return PageRouteBuilder(
@@ -310,6 +316,8 @@ class _SelectorButtonState extends State<SelectorButton> {
         betweenLineandlistElementPadding:
             widget.betweenLineandlistElementPadding,
         spacingBetweenFlagAndName: widget.spacingBetweenFlagAndName,
+        closeIconClickAreaHeightSize: widget.closeIconClickAreaHeightSize,
+        closeIconClickAreaWidthSize: widget.closeIconClickAreaWidthSize,
       ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         //! Curve animation
@@ -412,6 +420,10 @@ class _SelectorButtonState extends State<SelectorButton> {
                   betweenLineandlistElementPadding:
                       widget.betweenLineandlistElementPadding,
                   spacingBetweenFlagAndName: widget.spacingBetweenFlagAndName,
+                  closeIconClickAreaHeightSize:
+                      widget.closeIconClickAreaHeightSize,
+                  closeIconClickAreaWidthSize:
+                      widget.closeIconClickAreaWidthSize,
                 ),
               );
             },

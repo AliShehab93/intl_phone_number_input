@@ -1,12 +1,12 @@
-import 'dart:async';
 import 'dart:isolate';
-
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_number_input/src/models/country_model.dart';
 import 'package:intl_phone_number_input/src/utils/filter_processing.dart';
 import 'package:intl_phone_number_input/src/utils/test/test_helper.dart';
 import 'package:intl_phone_number_input/src/utils/util.dart';
 import 'package:flutter/material.dart';
+
+import 'close_widget.dart';
 
 /// Creates a list of Countries with a search textfield.!dsfsdf
 final UniqueKey _key = UniqueKey();
@@ -45,6 +45,10 @@ class CountrySearchListWidget extends StatefulWidget {
   //!
   //! spacing between flags and name
   final double spacingBetweenFlagAndName;
+  //!
+  //! search icon height and width
+  final double closeIconClickAreaHeightSize;
+  final double closeIconClickAreaWidthSize;
   //!
   final String headerName;
   final double heightOfTheCloseBottom;
@@ -110,6 +114,8 @@ class CountrySearchListWidget extends StatefulWidget {
     required this.underSearchBarPadding,
     required this.betweenLineandlistElementPadding,
     required this.spacingBetweenFlagAndName,
+    required this.closeIconClickAreaHeightSize,
+    required this.closeIconClickAreaWidthSize,
   });
 
   @override
@@ -124,24 +130,20 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
       ValueNotifier([]);
   // late List<Country> filteredCountries = [];
   late Isolate? _isolate;
-  late ReceivePort _receivePort;
+  late ReceivePort? _receivePort;
 
   @override
   void initState() {
     super.initState();
+    _receivePort = ReceivePort();
     filterCountriesIsolate();
   }
 
-  void filterCountriesIsolate({String? value}) async {
-    _receivePort = ReceivePort();
-    // if (_isolate != null) {
-    //   // _isolate.resume(resumeCapability)
-    // }
-
+  void filterCountriesIsolate({String? value, bool noListening = false}) async {
     try {
       final FilterProcessing data = FilterProcessing(
         countries: widget.countries,
-        sendPort: _receivePort.sendPort,
+        sendPort: _receivePort!.sendPort,
         text: value == null ? _searchController.text.trim() : value,
       );
       await Isolate.spawn<FilterProcessing>(
@@ -150,19 +152,23 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
       ).then<void>((Isolate isolate) {
         this._isolate = isolate;
       });
-      _receivePort.listen((dynamic message) {
-        if (message is List<Country>) {
-          // Timer(Duration(milliseconds: 205), () {
-          {
-            // setState(() {
-            _valueNotifierListCountriesFiltred.value = message;
-            // filteredCountries = message;
+      if (!noListening)
+        _receivePort!.listen((dynamic message) {
+          if (message is List<Country>) {
+            // Timer(Duration(milliseconds: 205), () {
+            {
+              // setState(() {
+
+              setState(() {
+                _valueNotifierListCountriesFiltred.value = message;
+              });
+              // filteredCountries = message;
+              // });
+              // _isolate!.pause();
+            }
             // });
-            // _isolate!.pause();
           }
-          // });
-        }
-      });
+        });
     } catch (e) {
       print("Error: $e");
     }
@@ -217,7 +223,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
   @override
   void dispose() {
     if (_isolate != null) _isolate!.kill();
-    _receivePort.close();
+    _receivePort!.close();
     _searchController.dispose();
     super.dispose();
   }
@@ -307,32 +313,35 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                     ),
                     // ),
                     //! Close button Icon
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: widget.topClosePadding,
-                        right: widget.rightClosePadding,
-                      ),
-                      child: GestureDetector(
-                        onTap: () async {
-                          if (widget.currentState.canPop()) {
-                            widget.currentState.pop(
-                              (widget.byDefaultySelectedCountry),
-                            );
-                          }
-                        },
-                        child: SizedBox(
-                          width: widget.widthOfTheCloseBottom,
-                          height: widget.heightOfTheCloseBottom,
-                          child: SvgPicture.asset(
-                            'assets/svgs/close.svg',
-                            key: _keyClose,
-                            semanticsLabel: 'close',
-                            color: widget.closeBottonColor,
-                            fit: BoxFit.cover,
-                            package: 'intl_phone_number_input',
-                            placeholderBuilder: (context) =>
-                                const SizedBox.shrink(),
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                    GestureDetector(
+                      onTap: () async {
+                        if (widget.currentState.canPop()) {
+                          widget.currentState.pop(
+                            (widget.byDefaultySelectedCountry),
+                          );
+                        }
+                      },
+                      child: //! Close button Icon
+                          Container(
+                        alignment: Alignment.topRight,
+                        color: Colors.transparent,
+                        width: widget.closeIconClickAreaWidthSize,
+                        height: widget.closeIconClickAreaHeightSize,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: widget.topClosePadding,
+                            right: widget.rightClosePadding,
+                          ),
+                          child: Container(
+                            color: Colors.transparent,
+                            height: widget.heightOfTheCloseBottom,
+                            width: widget.heightOfTheCloseBottom,
+                            child: CustomPaint(
+                              painter: CloseWithStroke1(
+                                color: widget.closeBottonColor,
+                                value: widget.heightOfTheCloseBottom,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -367,17 +376,21 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                               SizedBox(
                                 width: widget.searchIconWidth,
                                 height: widget.searchIconWidth,
-                                child: SvgPicture.asset(
-                                  'assets/svgs/search_country.svg',
-                                  key: _keySearch,
-                                  semanticsLabel: 'search',
+                                child: Icon(
+                                  Icons.search,
                                   color: widget.closeBottonColor,
-                                  fit: BoxFit.cover,
-                                  package: 'intl_phone_number_input',
-                                  placeholderBuilder: (context) =>
-                                      const SizedBox.shrink(),
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
                                 ),
+                                //  SvgPicture.asset(
+                                //   'assets/svgs/search_country.svg',
+                                //   key: _keySearch,
+                                //   semanticsLabel: 'search',
+                                //   color: widget.closeBottonColor,
+                                //   fit: BoxFit.cover,
+                                //   package: 'intl_phone_number_input',
+                                //   placeholderBuilder: (context) =>
+                                //       const SizedBox.shrink(),
+                                //   clipBehavior: Clip.antiAliasWithSaveLayer,
+                                // ),
                               ),
                             ],
                           ),
@@ -393,8 +406,9 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                           style: widget.countryNameStyle,
                           controller: _searchController,
                           autofocus: widget.autoFocus,
-                          onChanged: (value) => setState(
-                            () => filterCountriesIsolate(value: value),
+                          onChanged: (value) => filterCountriesIsolate(
+                            value: value,
+                            noListening: true,
                           ),
                         ),
                       ),
@@ -427,9 +441,10 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                             padding: const EdgeInsets.all(0),
                             controller: widget.scrollController,
                             shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
                             // addAutomaticKeepAlives: false,
                             // shrinkWrap: true,
-                            itemCount: value.isNotEmpty ? 244 : 0,
+                            itemCount: value.isNotEmpty ? value.length : 0,
                             itemBuilder: (BuildContext context, int index) {
                               return Column(
                                 children: [
@@ -554,8 +569,6 @@ class _Flag extends StatelessWidget {
                         width: width,
                         child: SvgPicture.asset(
                           country!.flagUri,
-                          key: UniqueKey(),
-                          semanticsLabel: country!.name,
                           fit: BoxFit.fill,
                           package: 'intl_phone_number_input',
                           placeholderBuilder: (context) =>

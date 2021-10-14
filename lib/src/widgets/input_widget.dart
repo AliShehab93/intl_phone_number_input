@@ -81,6 +81,9 @@ class InternationalPhoneNumberInput extends StatefulWidget {
   //!
   final Color colorOfTheArrowAndTheBarAtTheRight;
   //!
+  final double closeIconClickAreaHeightSize;
+  final double closeIconClickAreaWidthSize;
+  //!
   final SelectorConfig selectorConfig;
   final String headerName;
   final double elementsListingSpacing;
@@ -237,6 +240,8 @@ class InternationalPhoneNumberInput extends StatefulWidget {
     required this.underSearchBarPadding,
     required this.betweenLineandlistElementPadding,
     required this.spacingBetweenFlagAndName,
+    required this.closeIconClickAreaHeightSize,
+    required this.closeIconClickAreaWidthSize,
     this.leftTextFieldFlag = 15,
     this.rightTextFieldFlag = 8.67,
     this.arrowHeight = 5.86,
@@ -529,6 +534,8 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
           rightTextFieldFlag: widget.rightTextFieldFlag,
           arrowHeight: widget.arrowHeight,
           arrowWidth: widget.arrowWidth,
+          closeIconClickAreaHeightSize: widget.closeIconClickAreaHeightSize,
+          closeIconClickAreaWidthSize: widget.closeIconClickAreaWidthSize,
         ),
       );
     }
@@ -715,6 +722,10 @@ class _InputWidgetView
                       arrowWidth: widget.arrowWidth,
                       colorOfTheArrowAndTheBarAtTheRight:
                           widget.colorOfTheArrowAndTheBarAtTheRight,
+                      closeIconClickAreaHeightSize:
+                          widget.closeIconClickAreaHeightSize,
+                      closeIconClickAreaWidthSize:
+                          widget.closeIconClickAreaWidthSize,
                     ),
                   ],
                 ),

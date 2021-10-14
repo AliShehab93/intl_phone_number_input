@@ -84,6 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
               hintStyle: TextStyle(),
               rightClosePadding: 1,
               topClosePadding: 1,
+              closeIconClickAreaHeightSize: 50,
+              closeIconClickAreaWidthSize: 50,
             ),
             ElevatedButton(
               onPressed: () {

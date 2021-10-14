@@ -44,6 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
               barColumnElementsColor: Colors.black,
               searchIconHeight: 44,
               searchIconWidth: 44,
+              closeIconClickAreaHeightSize: 50,
+              closeIconClickAreaWidthSize: 50,
               flagHeight: 40,
               flagWidth: 40,
               rightClosePadding: 1,
