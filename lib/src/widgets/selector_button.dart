@@ -231,8 +231,8 @@ class _SelectorButtonState extends State<SelectorButton> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: widget.rightTextFieldFlag,
+                    padding: EdgeInsets.only(
+                      left: widget.rightTextFieldFlag,
                     ),
                     child: SvgPicture.asset(
                       'assets/svgs/arrow_down.svg',

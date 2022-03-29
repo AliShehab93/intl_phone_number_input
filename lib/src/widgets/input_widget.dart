@@ -347,8 +347,11 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
 
   @override
   Widget build(BuildContext context) {
-    return _InputWidgetView(
-      state: this,
+    return Container(
+      color: Colors.transparent,
+      child: _InputWidgetView(
+        state: this,
+      ),
     );
   }
 
@@ -624,201 +627,206 @@ class _InputWidgetView
     final countryCode = state.country?.alpha2Code ?? '';
     final dialCode = state.country?.dialCode ?? '';
 
-    return Row(
-      textDirection: TextDirection.ltr,
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          margin: const EdgeInsets.only(
-            left: 3.0,
-            top: 5,
-            bottom: 5,
+    return Container(
+      color: Colors.transparent,
+      child: Row(
+        textDirection: TextDirection.ltr,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          // //! spacing
+          // SizedBox(width: widget.leftPaddingFromDialCode),
+          //! dial code
+          Text(
+            '$dialCode ',
+            maxLines: 1,
+            textDirection: TextDirection.ltr,
+            softWrap: true,
+            textWidthBasis: TextWidthBasis.parent,
+            style: widget.selectorTextStyle,
           ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(23),
-              bottomLeft: Radius.circular(23),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    right: BorderSide(
-                      // TODO
-                      color: widget.colorOfTheArrowAndTheBarAtTheRight,
-                      width: 0.251,
-                    ),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    SelectorButton(
-                      arrowIconColor: widget.arrowIconColor,
-                      iconSize: widget.iconSize,
-                      backgroundPopUpBlurAndOpacityColor:
-                          widget.backgroundPopUpBlurAndOpacityColor,
-                      heightOfTheCloseBottom: widget.heightOfTheCloseBottom,
-                      widthOfTheCloseBottom: widget.widthOfTheCloseBottom,
-                      elementsListingSpacing: widget.elementsListingSpacing,
-                      rightPaddingAlignElement: widget.rightPaddingAlignElement,
-                      barColor: widget.barColor,
-                      edgeInsetsLeft: widget.edgeInsetsLeft,
-                      leftPaddingAlignElement: widget.leftPaddingAlignElement,
-                      edgeInsetsRight: widget.edgeInsetsRight,
-                      edgeInsetsTop: widget.edgeInsetsTop,
-                      edgeInsetsBottom: widget.edgeInsetsBottom,
-                      headerName: widget.headerName,
-                      backgroundDialogOutsideWidget:
-                          widget.backgroundDialogOutsideWidget,
-                      backgroundDialogColor: widget.backgroundDialogColor,
-                      closeBottonColor: widget.closeBottonColor,
-                      countryNameStyle: widget.countryNameStyle,
-                      dialCodeStyle: widget.dialCodeStyle,
-                      closeDialog: widget.closeDialog,
-                      headerTextStyle: widget.headerTextStyle,
-                      country: state.country,
-                      countries: state.countries,
-                      onCountryChanged: state.onCountryChanged,
-                      selectorConfig: widget.selectorConfig,
-                      selectorTextStyle: widget.textStyle,
-                      searchBoxDecoration: widget.searchBoxDecoration,
-                      locale: state.locale,
-                      isEnabled: widget.isEnabled,
-                      autoFocusSearchField: widget.autoFocusSearch,
-                      isScrollControlled:
-                          widget.countrySelectorScrollControlled,
-                      leftPaddingAlignHeaderText:
-                          widget.leftPaddingAlignHeaderText,
-                      topPaddingAlignHeaderText:
-                          widget.topPaddingAlignHeaderText,
-                      withBlur: widget.withBlur,
-                      currentState: widget.currentState,
-                      rightClosePadding: widget.rightClosePadding,
-                      topClosePadding: widget.topClosePadding,
-                      flagHeight: widget.flagHeight,
-                      flagWidth: widget.flagWidth,
-                      searchIconHeight: widget.searchIconHeight,
-                      searchIconWidth: widget.searchIconWidth,
-                      barColumnElementsColor: widget.barColumnElementsColor,
-                      aboveSearchBarPadding: widget.aboveSearchBarPadding,
-                      underSearchBarPadding: widget.underSearchBarPadding,
-                      betweenLineandlistElementPadding:
-                          widget.betweenLineandlistElementPadding,
-                      spacingBetweenFlagAndName:
-                          widget.spacingBetweenFlagAndName,
-                      leftTextFieldFlag: widget.leftTextFieldFlag,
-                      rightTextFieldFlag: widget.rightTextFieldFlag,
-                      arrowHeight: widget.arrowHeight,
-                      arrowWidth: widget.arrowWidth,
-                      colorOfTheArrowAndTheBarAtTheRight:
-                          widget.colorOfTheArrowAndTheBarAtTheRight,
-                      closeIconClickAreaHeightSize:
-                          widget.closeIconClickAreaHeightSize,
-                      closeIconClickAreaWidthSize:
-                          widget.closeIconClickAreaWidthSize,
-                    ),
-                  ],
-                ),
-              ),
-              //! spacing
-              SizedBox(width: widget.leftPaddingFromDialCode),
-              //! dial code
-              Text(
-                '($dialCode)',
-                maxLines: 1,
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(left: widget.rightTextFieldFlag),
+              child: TextFormField(
+                key: Key(TestHelper.TextInputKeyValue),
                 textDirection: TextDirection.ltr,
-                softWrap: true,
-                textWidthBasis: TextWidthBasis.parent,
-                style: widget.selectorTextStyle,
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.only(left: widget.rightTextFieldFlag),
-            child: TextFormField(
-              key: Key(TestHelper.TextInputKeyValue),
-              textDirection: TextDirection.ltr,
-              controller: state.controller,
-              cursorColor: widget.cursorColor,
-              focusNode: widget.focusNode,
-              enabled: widget.isEnabled,
-              autofocus: widget.autoFocus,
-              keyboardType: widget.keyboardType,
-              textInputAction: widget.keyboardAction,
-              style: widget.textStyle,
-              decoration: InputDecoration(
-                isDense: true,
-                alignLabelWithHint: true,
-                isCollapsed: true,
-                fillColor: widget.backgroundColorForFields,
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(
-                      18,
+                controller: state.controller,
+                cursorColor: widget.cursorColor,
+                focusNode: widget.focusNode,
+                enabled: widget.isEnabled,
+                autofocus: widget.autoFocus,
+                keyboardType: widget.keyboardType,
+                textInputAction: widget.keyboardAction,
+                style: widget.textStyle,
+                decoration: InputDecoration(
+                  isDense: true,
+                  alignLabelWithHint: true,
+                  isCollapsed: true,
+                  fillColor: widget.backgroundColorForFields,
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
                     ),
-                    bottomRight: Radius.circular(
-                      18,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(
+                        18,
+                      ),
+                      bottomRight: Radius.circular(
+                        18,
+                      ),
                     ),
                   ),
-                ),
-                hintText: widget.hintText,
-                hintStyle: widget.hintStyle,
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(
-                      18,
+                  hintText: widget.hintText,
+                  hintStyle: widget.hintStyle,
+                  // label: Text('Phone*'),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
                     ),
-                    bottomRight: Radius.circular(
-                      18,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(
+                        18,
+                      ),
+                      bottomRight: Radius.circular(
+                        18,
+                      ),
                     ),
                   ),
                 ),
+                textAlign: widget.textAlign,
+                textAlignVertical: widget.textAlignVertical,
+                onEditingComplete: widget.onSubmit,
+                onFieldSubmitted: widget.onFieldSubmitted,
+                autovalidateMode: widget.autoValidateMode,
+                autofillHints: widget.autofillHints,
+                validator: null,
+                onSaved: state.onSaved,
+                scrollPadding: widget.scrollPadding,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(widget.maxLength),
+                  widget.formatInput
+                      ? AsYouTypeFormatter(
+                    isoCode: countryCode,
+                    dialCode: dialCode,
+                    onInputFormatted: (TextEditingValue value) {
+                      state.controller!.value = value;
+                    },
+                  )
+                      : FilteringTextInputFormatter.digitsOnly,
+                ],
+                onChanged: state.onChanged,
               ),
-              textAlign: widget.textAlign,
-              textAlignVertical: widget.textAlignVertical,
-              onEditingComplete: widget.onSubmit,
-              onFieldSubmitted: widget.onFieldSubmitted,
-              autovalidateMode: widget.autoValidateMode,
-              autofillHints: widget.autofillHints,
-              validator: null,
-              onSaved: state.onSaved,
-              scrollPadding: widget.scrollPadding,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(widget.maxLength),
-                widget.formatInput
-                    ? AsYouTypeFormatter(
-                        isoCode: countryCode,
-                        dialCode: dialCode,
-                        onInputFormatted: (TextEditingValue value) {
-                          state.controller!.value = value;
-                        },
-                      )
-                    : FilteringTextInputFormatter.digitsOnly,
-              ],
-              onChanged: state.onChanged,
             ),
           ),
-        ),
-      ],
+          Container(
+            margin: const EdgeInsets.only(
+              left: 0.0,
+              top: 5,
+              bottom: 5,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(0),
+                bottomLeft: Radius.circular(0),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      // right: BorderSide(
+                      //   // TODO
+                      //   color: widget.colorOfTheArrowAndTheBarAtTheRight,
+                      //   width: 0.251,
+                      // ),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      SelectorButton(
+                        arrowIconColor: widget.arrowIconColor,
+                        iconSize: widget.iconSize,
+                        backgroundPopUpBlurAndOpacityColor:
+                        widget.backgroundPopUpBlurAndOpacityColor,
+                        heightOfTheCloseBottom: widget.heightOfTheCloseBottom,
+                        widthOfTheCloseBottom: widget.widthOfTheCloseBottom,
+                        elementsListingSpacing: widget.elementsListingSpacing,
+                        rightPaddingAlignElement: widget.rightPaddingAlignElement,
+                        barColor: widget.barColor,
+                        edgeInsetsLeft: widget.edgeInsetsLeft,
+                        leftPaddingAlignElement: widget.leftPaddingAlignElement,
+                        edgeInsetsRight: widget.edgeInsetsRight,
+                        edgeInsetsTop: widget.edgeInsetsTop,
+                        edgeInsetsBottom: widget.edgeInsetsBottom,
+                        headerName: widget.headerName,
+                        backgroundDialogOutsideWidget:
+                        widget.backgroundDialogOutsideWidget,
+                        backgroundDialogColor: widget.backgroundDialogColor,
+                        closeBottonColor: widget.closeBottonColor,
+                        countryNameStyle: widget.countryNameStyle,
+                        dialCodeStyle: widget.dialCodeStyle,
+                        closeDialog: widget.closeDialog,
+                        headerTextStyle: widget.headerTextStyle,
+                        country: state.country,
+                        countries: state.countries,
+                        onCountryChanged: state.onCountryChanged,
+                        selectorConfig: widget.selectorConfig,
+                        selectorTextStyle: widget.textStyle,
+                        searchBoxDecoration: widget.searchBoxDecoration,
+                        locale: state.locale,
+                        isEnabled: widget.isEnabled,
+                        autoFocusSearchField: widget.autoFocusSearch,
+                        isScrollControlled:
+                        widget.countrySelectorScrollControlled,
+                        leftPaddingAlignHeaderText:
+                        widget.leftPaddingAlignHeaderText,
+                        topPaddingAlignHeaderText:
+                        widget.topPaddingAlignHeaderText,
+                        withBlur: widget.withBlur,
+                        currentState: widget.currentState,
+                        rightClosePadding: widget.rightClosePadding,
+                        topClosePadding: widget.topClosePadding,
+                        flagHeight: widget.flagHeight,
+                        flagWidth: widget.flagWidth,
+                        searchIconHeight: widget.searchIconHeight,
+                        searchIconWidth: widget.searchIconWidth,
+                        barColumnElementsColor: widget.barColumnElementsColor,
+                        aboveSearchBarPadding: widget.aboveSearchBarPadding,
+                        underSearchBarPadding: widget.underSearchBarPadding,
+                        betweenLineandlistElementPadding:
+                        widget.betweenLineandlistElementPadding,
+                        spacingBetweenFlagAndName:
+                        widget.spacingBetweenFlagAndName,
+                        leftTextFieldFlag: widget.leftTextFieldFlag,
+                        rightTextFieldFlag: widget.rightTextFieldFlag,
+                        arrowHeight: widget.arrowHeight,
+                        arrowWidth: widget.arrowWidth,
+                        colorOfTheArrowAndTheBarAtTheRight:
+                        widget.colorOfTheArrowAndTheBarAtTheRight,
+                        closeIconClickAreaHeightSize:
+                        widget.closeIconClickAreaHeightSize,
+                        closeIconClickAreaWidthSize:
+                        widget.closeIconClickAreaWidthSize,
+                      ),
+                    ],
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
