@@ -176,7 +176,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
 
   //spawn accepts only static methods or top-level functions
 
-  static void filterSeperatally(
+  void filterSeperatally(
     FilterProcessing data,
   ) {
     final SendPort? sender = data.sendPort;
@@ -198,7 +198,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
     return country.name;
   }
 
-  static List<Country> filterCountries({
+  List<Country> filterCountries({
     required String text,
     required List<Country> countries,
   }) {
@@ -211,7 +211,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                 country.alpha3Code!.toLowerCase().startsWith(
                       value.toLowerCase(),
                     ) ||
-                country.name!.toLowerCase().contains(value.toLowerCase()) ||
+                getCountryName(country:country, local: widget.locale??"") !.toLowerCase().contains(value.toLowerCase()) ||
                 country.dialCode!.contains(value.toLowerCase()),
           )
           .toList();
@@ -485,7 +485,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                                         Expanded(
                                           flex: 4,
                                           child: Text(
-                                              '${value.isNotEmpty ? value[index].name : ''}',
+                                              '${value.isNotEmpty ? getCountryName(country:value[index], local: widget.locale??"") : ''}',
                                               overflow: TextOverflow.ellipsis,
                                               style: widget.countryNameStyle,
                                               textAlign: TextAlign.start),
