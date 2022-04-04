@@ -260,9 +260,9 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
     return GestureDetector(
       onTap: () => print('inside'),
       child: Padding(
-        padding: EdgeInsets.only(
-          left: widget.edgeInsetsLeft - 2,
-          right: widget.edgeInsetsRight - 2,
+        padding: EdgeInsetsDirectional.only(
+          start: widget.edgeInsetsLeft - 2,
+          end: widget.edgeInsetsRight - 2,
           top: widget.edgeInsetsTop - 5,
           bottom: widget.edgeInsetsBottom,
         ),
@@ -301,9 +301,9 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                     //   flex: 5,
                     //   child:
                     Padding(
-                      padding: EdgeInsets.only(
+                      padding: EdgeInsetsDirectional.only(
                         top: widget.topPaddingAlignHeaderText,
-                        left: widget.leftPaddingAlignHeaderText,
+                        start: widget.leftPaddingAlignHeaderText,
                       ),
                       child: Text(
                         widget.headerName,
@@ -323,14 +323,14 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                       },
                       child: //! Close button Icon
                           Container(
-                        alignment: Alignment.topRight,
+                        alignment: AlignmentDirectional.topEnd,
                         color: Colors.transparent,
                         width: widget.closeIconClickAreaWidthSize,
                         height: widget.closeIconClickAreaHeightSize,
                         child: Padding(
-                          padding: EdgeInsets.only(
+                          padding: EdgeInsetsDirectional.only(
                             top: widget.topClosePadding,
-                            right: widget.rightClosePadding,
+                            end: widget.rightClosePadding,
                           ),
                           child: Container(
                             color: Colors.transparent,
@@ -350,9 +350,9 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                 ),
                 //! under title
                 Padding(
-                  padding: EdgeInsets.only(
-                    left: widget.leftPaddingAlignElement,
-                    right: widget.rightPaddingAlignElement,
+                  padding: EdgeInsetsDirectional.only(
+                    start: widget.leftPaddingAlignElement,
+                    end: widget.rightPaddingAlignElement,
                     top: widget.aboveSearchBarPadding,
                     bottom: widget.underSearchBarPadding,
                   ),
@@ -363,8 +363,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                     children: [
                       //! search Icon
                       Padding(
-                        padding: EdgeInsets.only(
-                            right: widget.spacingBetweenFlagAndName),
+                        padding: EdgeInsetsDirectional.only(end: widget.spacingBetweenFlagAndName),
                         child: Container(
                           color: Colors.transparent,
                           width: 40,
@@ -423,9 +422,9 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                 ),
                 Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(
-                      left: widget.leftPaddingAlignElement,
-                      right: widget.rightPaddingAlignElement,
+                    padding: EdgeInsetsDirectional.only(
+                      start: widget.leftPaddingAlignElement,
+                      end: widget.rightPaddingAlignElement,
                     ),
                     child: ValueListenableBuilder<List<Country>>(
                         valueListenable: _valueNotifierListCountriesFiltred,

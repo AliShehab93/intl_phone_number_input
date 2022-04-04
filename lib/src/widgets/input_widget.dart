@@ -648,7 +648,7 @@ class _InputWidgetView
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(left: widget.rightTextFieldFlag),
+              padding: EdgeInsetsDirectional.only(start: widget.rightTextFieldFlag),
               child: TextFormField(
                 key: Key(TestHelper.TextInputKeyValue),
                 textDirection: TextDirection.ltr,
@@ -722,8 +722,8 @@ class _InputWidgetView
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(
-              left: 0.0,
+            margin: const EdgeInsetsDirectional.only(
+              start: 0.0,
               top: 5,
               bottom: 5,
             ),

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -218,8 +216,8 @@ class _SelectorButtonState extends State<SelectorButton> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
-                      left: widget.leftTextFieldFlag,
+                    padding: EdgeInsetsDirectional.only(
+                      start: widget.leftTextFieldFlag,
                     ),
                     child: Item(
                       country: widget.country,
@@ -231,8 +229,8 @@ class _SelectorButtonState extends State<SelectorButton> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(
-                      left: widget.rightTextFieldFlag,
+                    padding: EdgeInsetsDirectional.only(
+                      start: widget.rightTextFieldFlag,
                     ),
                     child: SvgPicture.asset(
                       'assets/svgs/arrow_down.svg',
