@@ -211,7 +211,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                 country.alpha3Code!.toLowerCase().startsWith(
                       value.toLowerCase(),
                     ) ||
-                getCountryName(country:country, local: widget.locale??"") !.toLowerCase().contains(value.toLowerCase()) ||
+                getCountryName(country:country, local: widget.locale??"ar") !.toLowerCase().contains(value.toLowerCase()) ||
                 country.dialCode!.contains(value.toLowerCase()),
           )
           .toList();
@@ -484,7 +484,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                                         Expanded(
                                           flex: 4,
                                           child: Text(
-                                              '${value.isNotEmpty ? getCountryName(country:value[index], local: widget.locale??"") : ''}',
+                                              '${value.isNotEmpty ? getCountryName(country:value[index], local: widget.locale??"ar") : ''}',
                                               overflow: TextOverflow.ellipsis,
                                               style: widget.countryNameStyle,
                                               textAlign: TextAlign.start),
