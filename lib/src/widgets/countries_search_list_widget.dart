@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:isolate';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_number_input/src/models/country_model.dart';
@@ -195,6 +196,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
         return translated;
       }
     }
+    log(country.nameTranslations.toString());
     return country.name;
   }
 
@@ -211,7 +213,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                 country.alpha3Code!.toLowerCase().startsWith(
                       value.toLowerCase(),
                     ) ||
-                getCountryName(country:country, local: widget.locale??"ar") !.toLowerCase().contains(value.toLowerCase()) ||
+                getCountryName(country:country, local: widget.locale??"") !.toLowerCase().contains(value.toLowerCase()) ||
                 country.dialCode!.contains(value.toLowerCase()),
           )
           .toList();
@@ -363,7 +365,8 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                     children: [
                       //! search Icon
                       Padding(
-                        padding: EdgeInsetsDirectional.only(end: widget.spacingBetweenFlagAndName),
+                        padding: EdgeInsetsDirectional.only(
+                            end: widget.spacingBetweenFlagAndName),
                         child: Container(
                           color: Colors.transparent,
                           width: 40,
@@ -484,7 +487,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                                         Expanded(
                                           flex: 4,
                                           child: Text(
-                                              '${value.isNotEmpty ? getCountryName(country:value[index], local: widget.locale??"ar") : ''}',
+                                              '${value.isNotEmpty ? getCountryName(country: value[index], local: widget.locale ?? "") : ''}',
                                               overflow: TextOverflow.ellipsis,
                                               style: widget.countryNameStyle,
                                               textAlign: TextAlign.start),
