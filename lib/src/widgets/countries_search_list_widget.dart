@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:isolate';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_number_input/src/models/country_model.dart';
