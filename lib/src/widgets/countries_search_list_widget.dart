@@ -196,7 +196,6 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
         return translated;
       }
     }
-    log(country.nameTranslations.toString());
     return country.name;
   }
 
