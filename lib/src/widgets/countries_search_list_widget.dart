@@ -176,7 +176,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
 
   //spawn accepts only static methods or top-level functions
 
-  static void filterSeperatally(
+  void filterSeperatally(
     FilterProcessing data,
   ) {
     final SendPort? sender = data.sendPort;
@@ -198,7 +198,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
     return country.name;
   }
 
- static List<Country> filterCountries({
+  List<Country> filterCountries({
     required String text,
     required List<Country> countries,
   }) {
