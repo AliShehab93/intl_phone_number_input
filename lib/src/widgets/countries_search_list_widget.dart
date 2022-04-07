@@ -486,7 +486,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget>
                                         Expanded(
                                           flex: 4,
                                           child: Text(
-                                              '${value.isNotEmpty ? getCountryName(country: value[index], local: widget.locale ?? "") : ''}',
+                                              '${value.isNotEmpty ? value[index].name : ''}',
                                               overflow: TextOverflow.ellipsis,
                                               style: widget.countryNameStyle,
                                               textAlign: TextAlign.start),
